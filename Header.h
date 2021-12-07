@@ -1,8 +1,9 @@
 #pragma once
 class playfield {
 public:
+	playfield();
+	~playfield();
 	static char cells[3][3];
-	void init_cells();
 	void show_cells();
 	bool check_win();
 };

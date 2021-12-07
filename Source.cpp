@@ -6,16 +6,21 @@
 const float ver = 2.0;
 using namespace std;
 
-
-void playfield::init_cells()
+playfield::playfield()
 {
-	for (int i = 0; i < 3; i++)
-	{
+    for (int i = 0; i < 3; i++)
+    {
         for (int j = 0; j < 3; j++)
         {
             cells[i][j] = ' ';
         }
-	}
+    }
+    cout << "Привет, пользователь!\nЭто крестики-нолики v." << ver << ".\n";
+}
+
+playfield::~playfield()
+{
+    cout << "Спасибо за игру!\n";
 }
 
 void playfield::show_cells()
@@ -91,7 +96,7 @@ bool turns::player()
     cout << "Напишите номер строки.\n";
     cin >> p_line;
     p_line--;
-    if (p_line < 0 || p_line > 2) //cin.isdegit нужно вставить
+    if (p_line < 0 || p_line > 2) //try-catch нужно вставить
     {
         cout << "Неверные координаты, поробуйте еще раз!\n";
         return false;
@@ -99,7 +104,7 @@ bool turns::player()
     else
     {
         cout << "Напишите номер столбца.\n";
-        cin >> p_row; //cin.isdegit нужно вставить
+        cin >> p_row; //try-catch нужно вставить
         p_row--;
         if (p_row < 0 || p_row > 2)
         {
@@ -137,18 +142,17 @@ bool turns::computer()
 
 int main()
 {
+    srand(time(NULL));
+    setlocale(LC_ALL, "Russian"); //RU Lang in console
+
     playfield field;
     turns turn;
-    srand(time(NULL));
 
-    setlocale(LC_ALL, "Russian"); //RU Lang in console
-    cout << "Привет, пользователь!\nЭто крестики-нолики v." << ver <<".\n";
-    field.init_cells();
     field.show_cells();
     do
     {
         cout << "Выберите сторону. Для Х - введите 1, Для О - введите 2, 0 - что бы выйти.\n";
-        cin >> turn.side; //cin.isdegit нужно вставить
+        cin >> turn.side; //try-catch нужно вставить
     } while (!turn.pickside());
     if (turn.side == 1) 
     {
@@ -170,7 +174,7 @@ int main()
         } 
         field.show_cells();
     }
-    cout << "Спасибо за игру!\n";
+ 
     return 0;
 }
 
